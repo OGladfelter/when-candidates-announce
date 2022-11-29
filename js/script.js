@@ -85,10 +85,6 @@ function drawBeeswarm() {
             .attr("stroke", "black")
             .on('mouseover', function(event, d) {
                 d3.select(this).style('stroke-width', '2px').attr("r", 10);
-                console.log(event.pageX);
-                console.log(event.pageX / window.innerWidth);
-                console.log(tooltip.node().getBoundingClientRect().width)
-                console.log(' ')
                 tooltip
                     .html(d.candidate + ' announced ' + d.announced + ', ' + Math.abs(d.daysAfterMidtermsAnnounced) + ' days ' + (d.daysAfterMidtermsAnnounced > 0 ? ' after ' : ' before ') + 'midterms')
                     .style('left', event.pageX / window.innerWidth <= 0.5 ? d.x + 40 + 'px' : d.x - tooltip.node().getBoundingClientRect().width + 25 + 'px')
@@ -97,7 +93,7 @@ function drawBeeswarm() {
                     .duration(250)
                     .style('opacity', 0.95);
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function() {
                 d3.select(this).style('stroke-width', '1px').attr("r", 8);
                 tooltip.transition().duration(250).style('opacity', 0);
             });
